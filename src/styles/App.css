@@ -1,0 +1,130 @@
+/* GENERAL */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-weight: 450;
+    overflow-x: hidden;
+    position: relative;
+    background-color: #121212;
+    color: #fff;
+    font-family: 'Centra', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+    line-height: normal;
+}
+
+p, a, li, button, ul {
+    margin: 0;
+    padding: 0;
+    line-height: normal;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+button {
+    border: 0;
+    background-color: transparent;
+}
+
+
+/* NAVIGATION BAR */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    background-color: #121212;
+    transition: 0.3s ease-in-out;
+    padding: 20px 0;
+}
+
+
+/* BANNER */
+.banner {
+    margin-top: 0;
+    padding: 250px 0 100px 0;
+    background-image: url('../assets/background2.png');
+    background-position: center right;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.banner .webName {
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 8px 10px;
+    border: 5px solid rgb(255, 255, 255);
+    font-size: 20px;
+    margin-bottom: 20px;
+    display: inline-block;
+    border-radius: 15px;
+}
+
+.banner h1 {
+    font-size: 65px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    line-height: 1;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.banner p {
+    color: #B8B8B8;
+    font-size: 18px;
+    letter-spacing: 1px;
+    line-height: 1.5em;
+    width: 96%;
+}
+
+.banner button {
+    color: #fff;
+    font-weight: 700;
+    font-size: 20px;
+    margin-top: 40px;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+}
+
+.banner button svg {
+    font-size: 25px;
+    margin-left: 10px;
+    transition: 0.3s ease-in-out;
+    line-height: 1;
+}
+
+.banner button:hover svg {
+    margin-left: 20px;
+}
+
+.banner img {
+    width: 100%;
+    height: auto;
+    animation: updown 3s linear infinite;
+}
+
+@keyframes updown {
+    0% { transform: translateY(-15px); }
+    50% { transform: translateY(15px); }
+    100% { transform: translateY(-15px); }
+}
+
+.txt-rotate > .wrap {
+    border-right: 0.08em solid #666;
+}
