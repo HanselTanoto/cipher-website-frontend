@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-export default class Home extends Component {
+export default class StandardVigenere extends Component {
     render() {
         return (
             <div>
-                <h2>Home Page</h2>
+                <h2>Standard Vigenere Cipher</h2>
             </div>
         )
     }
