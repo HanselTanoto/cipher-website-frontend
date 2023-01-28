@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
+import { Download } from 'react-bootstrap-icons';
 
 function AutoKeyVigenere() {
     
@@ -19,6 +20,7 @@ function AutoKeyVigenere() {
         //     console.log(target)
         //     target && document.querySelector(target).scrollIntoView()
         // })
+
 
         const changeInputMethod = (e) => {
             if(isFileUsed){
@@ -47,9 +49,17 @@ function AutoKeyVigenere() {
             try{
                 response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}autokeyvigenere/encrypt`,formdata)
                 setResult(response.data.cipher)
+                console.log(response)
                 document.getElementById('container-result').scrollIntoView()
+                if(!isFileUsed)return
+                const blob = new Blob([response.data.cipher])
+                const href = window.URL.createObjectURL(blob)
+                const link = document.getElementById('download-file')
+                link.href  = href
+                link.setAttribute('download',file.name)
             }catch(error){
-                setErrorMsg(error.response.data.err)
+                console.log(error)
+                // setErrorMsg(error)
             }
         }
 
@@ -126,8 +136,14 @@ function AutoKeyVigenere() {
                        <Card style={{ width: '38rem',marginTop:'40px',backgroundColor:'#282A3A' }} id='result'>
                             <Card.Body style={{ padding:'0px' }}>
                                 <Card.Header style={{ color:'black',margin:'0px',backgroundColor:'#735F32',textAlign:'center',fontWeight:'bold'}}>Result</Card.Header>
-                                <div style={{ paddingLeft:'20px',paddingRight:'20px',marginTop:'20px',height:'200px' }}>
-                                    <Card.Text>{result}</Card.Text>
+                                <div style={{ paddingLeft:'20px',paddingRight:'20px',marginTop:'20px',height:'230px' }}>
+                                    <a id='download-file'>{(isFileUsed && result)?(<a>Download</a>):(<a></a>)}</a>
+                                    {(isFileUsed && result)?
+                                    (<div></div>):
+                                    (<div>
+                                        <Card.Text style={{ overflow:'hidden',height:'150px' }}>{result}</Card.Text>
+                                        <Button variant="outline-primary" style={{ marginTop:'25px' }} onClick={() => {navigator.clipboard.writeText(result)}}>Copy</Button>
+                                    </div>)}
                                 </div>
                             </Card.Body>
                         </Card>
