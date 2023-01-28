@@ -11,6 +11,8 @@ import Hill from '../pages/Hill'
 import About from '../pages/About'
 import Home from '../pages/Home'
 
+import Logo from '../assets/logo.png'
+
 export default class NavBarComp extends Component {
     render() {
         return (
@@ -19,6 +21,7 @@ export default class NavBarComp extends Component {
                     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                         <Container>
                             <Navbar.Brand as={Link} to="/">
+                                <img src={Logo} alt="CryptoCalc" width="40" height="40" className="d-inline-block align-top" />
                                 CryptoCalc
                             </Navbar.Brand>
                             <Navbar.Toggle aria-controls="responsive-navbar-nav" />

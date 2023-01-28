@@ -2,9 +2,9 @@ import {useEffect, useState} from 'react'
 import {Container, Row, Col} from 'react-bootstrap'
 import {ArrowRightCircle} from 'react-bootstrap-icons'
 import TrackVisibility from 'react-on-screen'
-import headerImg from '../assets/lock.svg'
+import headerImg from '../assets/ilustration2.svg'
 
-export const Banner = () => {
+export default function Banner() {
     const [loopNumber, setLoopNumber] = useState(0)
     const [isDelete, setIsDelete] = useState(false)
     const [text, setText] = useState('')

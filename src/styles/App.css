@@ -53,11 +53,18 @@ button {
     padding: 20px 0;
 }
 
+.navbar .navbar-brand {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
 
 /* BANNER */
 .banner {
     margin-top: 0;
-    padding: 250px 0 100px 0;
+    padding: 230px 0 125px 0;
     background-image: url('../assets/background2.png');
     background-position: center right;
     background-size: cover;
@@ -127,4 +134,82 @@ button {
 
 .txt-rotate > .wrap {
     border-right: 0.08em solid #666;
+}
+
+
+/* CAROUSEL */
+.carousel {
+    background-color: #121212;
+}
+
+.carousel .carousel-item {
+    text-align: center;
+    height: 500px;
+}
+
+.carousel .carousel-item img {
+    width: 100%;
+    height: auto;
+    opacity: 0.3;
+}
+
+
+/* CRYPTOGRAPHYDescription */
+.cryptographyDef {
+    margin-top: 0;
+    padding: 100px 0;
+    background-image: url('../assets/background1.png');
+    background-position: center right;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.cryptographyDef h2 {
+    font-size: 50px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    line-height: 1;
+    margin-bottom: 15px;
+    display: block;
+    font-weight: bold;
+}
+
+.cryptographyDef h4 {
+    font-size: 25px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    line-height: 1;
+    margin-bottom: 25px;
+    display: block;
+    font-weight: bold;
+}
+
+.cryptographyDef p {
+    color: #B8B8B8;
+    font-size: 18px;
+    letter-spacing: 1px;
+    line-height: 1.5em;
+    width: 96%;
+}
+
+.cryptographyDef img {
+    width: 100%;
+    height: auto;
+    animation: animate 3s linear infinite;
+    padding-right: 50px;
+}
+
+
+/* FOOTER */
+.footer {
+    padding: 15px;
+    background-color: #121212;
+}
+
+.footer p {
+    color: #B8B8B8;
+    font-size: 18px;
+    letter-spacing: 1px;
+    line-height: 1.5em;
+    width: 96%;
 }
