@@ -213,3 +213,8 @@ button {
     line-height: 1.5em;
     width: 96%;
 }
+
+.header-title{
+    margin-top: 100px;
+    text-align: center;
+}
