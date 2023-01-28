@@ -76,6 +76,12 @@ function AutoKeyVigenere() {
                 response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}autokeyvigenere/decrypt`,formdata)
                 setResult(response.data.plaintext)
                 document.getElementById('container-result').scrollIntoView()
+                if(!isFileUsed)return
+                const blob = new Blob([response.data.plaintext])
+                const href = window.URL.createObjectURL(blob)
+                const link = document.getElementById('download-file')
+                link.href  = href
+                link.setAttribute('download',file.name)
             }catch(error){
                 setErrorMsg(error.response.data.err)
             }
