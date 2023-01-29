@@ -62,7 +62,7 @@ export default function StandardVigenere() {
         let response = null
         try {
             response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}standardvigenere/decrypt`, formdata)
-            setResult(response.data.plain)
+            setResult(response.data.plaintext)
             console.log(response)
             document.getElementById('container-result').scrollIntoView()
             if (!isFileUsed) return
