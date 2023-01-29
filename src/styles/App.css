@@ -218,3 +218,70 @@ button {
     margin-top: 100px;
     text-align: center;
 }
+
+
+/* ENCRYPTION & DECRYPTION PAGES */
+.card {
+    width: 38rem;
+    margin-top: 40px;
+    background-color: #282A3A;
+}
+
+.card-body {
+    padding: 0px;
+}
+
+.card-header {
+    color: #000000;
+    margin: 0px;
+    background-color: #735F32;
+    text-align: center;
+    font-weight: bold;
+}
+
+.form-check {
+    margin-top: 15px;
+}
+
+.text-danger {
+    margin-top: 15px;
+}
+
+.container-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 75px;
+}
+
+.container-form-input {
+    padding: 0 20px;
+    margin-top: 20px;
+}
+
+.container-button {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.container-result {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0 20px 0;
+}
+
+.container-result-text {
+    padding: 0 20px;
+    margin-top: 20px;
+    height: 230px;
+}
+
+#fileUpload {
+    margin-top: 15px;
+}
+
+#textUpload {
+    margin-top: 15px;
+    height: 100px;
+    background-color: #C69749;
+}
