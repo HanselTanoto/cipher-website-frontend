@@ -6,7 +6,7 @@ export default function Playfair() {
     const [isFileUsed, setIsFileUsed] = useState(false)
     const [textUpload, setTextUpload] = useState('')
     const [key, setKey] = useState('')
-    const [keyMatrix, setKeyMatrix] = useState([['a', 'b', 'c', 'd', 'e'], ['f', 'g', 'h', 'i', 'k'], ['l', 'm', 'n', 'o', 'p'], ['q', 'r', 's', 't', 'u'], ['v', 'w', 'x', 'y', 'z']])
+    const [keyTable, setKeyTable] = useState('abcdefghiklmnopqrstuvwxyz')
     const [file, setFile] = useState(null)
     const [errorMsg, setErrorMsg] = useState('')
     const [result, setResult] = useState('')
@@ -26,6 +26,29 @@ export default function Playfair() {
         }
     }
 
+    const updateTable = (e) => {
+        let currentKey = ''
+        let typedKey = e.target.value.replace(/[^a-zA-Z]/g, '').toLowerCase()
+        for (let i = 0; i < typedKey.length; i++) {
+            let char = typedKey.charAt(i)
+            if (char == 'j') {
+                continue
+            }
+            if (currentKey.indexOf(char) == -1) {
+                currentKey += char
+            }
+        }
+        let alphabet = 'abcdefghiklmnopqrstuvwxyz'
+        for (let i = 0; i < alphabet.length; i++) {
+            let char = alphabet.charAt(i)
+            if (currentKey.indexOf(char) == -1) {
+                currentKey += char
+            }
+        }
+        setKeyTable(currentKey)
+    }
+
+
     const encode = async (e) => {
         setErrorMsg('')
         setResult('')
@@ -33,12 +56,12 @@ export default function Playfair() {
         const formdata = new FormData()
         formdata.append('textUpload', textUpload)
         formdata.append('key', key)
+        formdata.append('keyTable', keyTable)
         formdata.append('file', file)
         let response = null
         try {
             response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}playfair/encrypt`, formdata)
             setResult(response.data.cipher)
-            setKeyMatrix(response.data.keyMatrix)
             console.log(response)
             document.getElementById('container-result').scrollIntoView()
             if (!isFileUsed) return
@@ -60,12 +83,12 @@ export default function Playfair() {
         const formdata = new FormData()
         formdata.append('textUpload', textUpload)
         formdata.append('key', key)
+        formdata.append('keyTable', keyTable)
         formdata.append('file', file)
         let response = null
         try {
             response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}playfair/decrypt`, formdata)
             setResult(response.data.plaintext)
-            setKeyMatrix(response.data.keyMatrix)
             console.log(response)
             document.getElementById('container-result').scrollIntoView()
             if (!isFileUsed) return
@@ -109,45 +132,49 @@ export default function Playfair() {
                                         id="key"
                                         style={{ marginTop:'15px', height:'200px', backgroundColor:'#C69749'}}
                                         value={key}
-                                        onChange={(e) => setKey(e.target.value)} />
+                                        onChange={(e) => {
+                                            // only allow alphabet and space
+                                            setKey(e.target.value.replace(/[^a-zA-Z ]/g, ''))
+                                            updateTable(e)
+                                        }} />
                                 </Col>
                                 <Col>
                                     <Table striped bordered hover size="sm" className='table-key'>
                                         <tbody>
                                         <tr className='same-col-width'>
-                                                <th>{keyMatrix[0][0]}</th>
-                                                <th>{keyMatrix[0][1]}</th>
-                                                <th>{keyMatrix[0][2]}</th>
-                                                <th>{keyMatrix[0][3]}</th>
-                                                <th>{keyMatrix[0][4]}</th>
+                                                <th>{keyTable[0]}</th>
+                                                <th>{keyTable[1]}</th>
+                                                <th>{keyTable[2]}</th>
+                                                <th>{keyTable[3]}</th>
+                                                <th>{keyTable[4]}</th>
                                             </tr>
                                             <tr className='same-col-width'>
-                                                <th>{keyMatrix[1][0]}</th>
-                                                <th>{keyMatrix[1][1]}</th>
-                                                <th>{keyMatrix[1][2]}</th>
-                                                <th>{keyMatrix[1][3]}</th>
-                                                <th>{keyMatrix[1][4]}</th>
+                                                <th>{keyTable[5]}</th>
+                                                <th>{keyTable[6]}</th>
+                                                <th>{keyTable[7]}</th>
+                                                <th>{keyTable[8]}</th>
+                                                <th>{keyTable[9]}</th>
                                             </tr>
                                             <tr className='same-col-width'>
-                                                <th>{keyMatrix[2][0]}</th>
-                                                <th>{keyMatrix[2][1]}</th>
-                                                <th>{keyMatrix[2][2]}</th>
-                                                <th>{keyMatrix[2][3]}</th>
-                                                <th>{keyMatrix[2][4]}</th>
+                                                <th>{keyTable[10]}</th>
+                                                <th>{keyTable[11]}</th>
+                                                <th>{keyTable[12]}</th>
+                                                <th>{keyTable[13]}</th>
+                                                <th>{keyTable[14]}</th>
                                             </tr>
                                             <tr className='same-col-width'>
-                                                <th>{keyMatrix[3][0]}</th>
-                                                <th>{keyMatrix[3][1]}</th>
-                                                <th>{keyMatrix[3][2]}</th>
-                                                <th>{keyMatrix[3][3]}</th>
-                                                <th>{keyMatrix[3][4]}</th>
+                                                <th>{keyTable[15]}</th>
+                                                <th>{keyTable[16]}</th>
+                                                <th>{keyTable[17]}</th>
+                                                <th>{keyTable[18]}</th>
+                                                <th>{keyTable[19]}</th>
                                             </tr>
                                             <tr className='same-col-width'>
-                                                <th>{keyMatrix[4][0]}</th>
-                                                <th>{keyMatrix[4][1]}</th>
-                                                <th>{keyMatrix[4][2]}</th>
-                                                <th>{keyMatrix[4][3]}</th>
-                                                <th>{keyMatrix[4][4]}</th>
+                                                <th>{keyTable[20]}</th>
+                                                <th>{keyTable[21]}</th>
+                                                <th>{keyTable[22]}</th>
+                                                <th>{keyTable[23]}</th>
+                                                <th>{keyTable[24]}</th>
                                             </tr>
                                         </tbody>
                                     </Table>
