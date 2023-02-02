@@ -105,7 +105,7 @@ export default function Playfair() {
 
 
     return (
-        <div>
+        <div id='cipher-page'>
             <div className="container-form" id="container-form">
                 <Card className="form">
                     <Card.Body>

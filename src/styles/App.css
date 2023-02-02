@@ -305,3 +305,12 @@ tr:nth-child(even) {
 tr:nth-child(odd) {
     background-color: #e9ab49
 }
+
+
+/* CIPHER PAGES */
+#cipher-page {
+    background-image: url('../assets/background3.png');
+    background-position: center right;
+    background-size: cover;
+    background-repeat: no-repeat;
+}

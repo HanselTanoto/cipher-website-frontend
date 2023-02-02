@@ -80,7 +80,7 @@ export default function ExtendedVigenere() {
 
 
     return (
-        <div>
+        <div id = "cipher-page">
             <div className="container-form" id="container-form">
                 <Card className="form">
                     <Card.Body>

@@ -79,7 +79,7 @@ export default function StandardVigenere() {
 
 
     return (
-        <div>
+        <div id="cipher-page">
             <div className="container-form" id="container-form">
                 <Card className="form">
                     <Card.Body>

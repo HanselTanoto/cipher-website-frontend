@@ -107,7 +107,7 @@ function Affine() {
         }
 
         return (
-            <div>
+            <div id='cipher-page'>
                 <div style={{ display:'flex',justifyContent:'center',marginTop:'75px' }} id='container-form'>
                     <Card style={{ width: '38rem',marginTop:'40px',backgroundColor:'#282A3A' }}>
                         <Card.Body style={{ padding:'0px' }}>
@@ -144,8 +144,8 @@ function Affine() {
                                     }}
                                     />
                                 <Form.Check
-                                    type='checkbox'
-                                    label='Use file input'
+                                    type='switch'
+                                    label='Use File Input'
                                     id='isFileUsed'
                                     style={{marginTop:'15px' }}
                                     onChange={changeInputMethod}
