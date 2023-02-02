@@ -70,7 +70,8 @@ export default function Banner() {
                             </h1>
                             <h1>{'Calculator'}</h1>
                             <p>A free online tool for encryption and decryption using various algorithms like Vigenere Cipher, Affine Cipher, Playfair Cipher, and Hill Cipher. This calculator can perform encryption and decryption on text, file, picture, video, and audio.</p>
-                            <button onClick={() => console.log('connect')}>Let’s Try <ArrowRightCircle size={25} /></button>
+                            <button onClick={() => window.location.href = '/about'}>
+                                Learn More<ArrowRightCircle size={25} /></button>
                         </div>
                     )}
                     </TrackVisibility>

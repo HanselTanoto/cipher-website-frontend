@@ -286,14 +286,13 @@ button {
     background-color: #C69749;
 }
 
+
 /* TABLE */
-/* fixed column width and height */
 table {
     margin-top: 53px;
     table-layout: fixed;
     width: 100%;
     height: 200px; 
-    /* center text in table cells */
     text-align: center;
     font-size: 20px;
 }
@@ -314,3 +313,102 @@ tr:nth-child(odd) {
     background-size: cover;
     background-repeat: no-repeat;
 }
+
+
+/* ABOUT PAGE */
+.about {
+    margin-top: 0;
+    background-image: url('../assets/background3.png');
+    background-position: center right;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.about-desc {
+    margin-top: 0;
+    padding: 100px;
+    padding-bottom: 50px;
+}
+
+.about-desc h1 {
+    font-size: 50px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    line-height: 1;
+    margin: 40px 0 60px 0;
+    display: block;
+    font-weight: bold;
+    text-align: center;
+}
+
+.about-desc p {
+    color: #B8B8B8;
+    font-size: 18px;
+    letter-spacing: 1px;
+    line-height: 1.5em;
+    text-align: center;
+    margin: 0 70px 0 70px;
+}
+
+.cipher-list {
+    margin-top: 0;
+    align-self: center;
+    align-content: center;
+    justify-content: center;
+    padding: 0 9%;
+
+}
+
+.cipher-card {
+    margin-top: 0;
+    padding: 0;
+    background-color: #282A3A;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.cipher-card p {
+    color: #B8B8B8;
+    font-size: 16px;
+    letter-spacing: 1px;
+    line-height: 1.5em;
+    text-align: center;
+    padding: 30px;
+}
+
+.cipher-card h1 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    line-height: 1;
+    display: block;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+}
+
+
+
+
+/* .cipher-list h1 {
+    font-size: 50px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    line-height: 1;
+    margin: 40px 0 0 0;
+    display: block;
+    font-weight: bold;
+    text-align: center;
+}
+
+.cipher-list p {
+    color: #B8B8B8;
+    font-size: 18px;
+    letter-spacing: 1px;
+    line-height: 1.5em;
+    width: 96%;
+    text-align: center;
+    margin: 50px 70px 0 70px;
+    padding-right: 90px;
+} */
+
