@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import {Card , Form, Button} from 'react-bootstrap'
 import axios from 'axios'
+import { Buffer } from 'buffer'
 
 export default function ExtendedVigenere() {
     const [isFileUsed, setIsFileUsed] = useState(false)
@@ -33,6 +34,7 @@ export default function ExtendedVigenere() {
         formdata.append('textUpload', textUpload)
         formdata.append('key', key)
         formdata.append('file', file)
+        console.log(file)
         let response = null
         try {
             response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}extendedvigenere/encrypt`, formdata)
@@ -40,14 +42,13 @@ export default function ExtendedVigenere() {
             console.log(response)
             document.getElementById('container-result').scrollIntoView()
             if (!isFileUsed) return
-            const blob = new Blob([response.data.cipher])
+            const blob = new Blob([Buffer.from(response.data.cipher),'utf-8'])
             const href = window.URL.createObjectURL(blob)
             const link = document.getElementById('download-file')
             link.href = href
             link.setAttribute('download', file.name)
         } catch (error) {
-            console.log(error)
-            setErrorMsg(error.response.data.message)
+            setErrorMsg(error.response.data.err)
         }
     }
 
@@ -66,14 +67,14 @@ export default function ExtendedVigenere() {
             console.log(response)
             document.getElementById('container-result').scrollIntoView()
             if (!isFileUsed) return
-            const blob = new Blob([response.data.plain])
+            console.log(response.data)
+            const blob = new Blob([Buffer.from(response.data.plaintext,'utf-8')])
             const href = window.URL.createObjectURL(blob)
             const link = document.getElementById('download-file')
             link.href = href
             link.setAttribute('download', file.name)
         } catch (error) {
-            console.log(error)
-            setErrorMsg(error.response.data.message)
+            setErrorMsg(error.response.data.err)
         }
     }
 
