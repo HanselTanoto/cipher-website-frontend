@@ -46,8 +46,7 @@ export default function StandardVigenere() {
             link.href = href
             link.setAttribute('download', file.name)
         } catch (error) {
-            console.log(error)
-            setErrorMsg(error.response.data.message)
+            setErrorMsg(error.response.data.err)
         }
     }
 
@@ -66,14 +65,13 @@ export default function StandardVigenere() {
             console.log(response)
             document.getElementById('container-result').scrollIntoView()
             if (!isFileUsed) return
-            const blob = new Blob([response.data.plain])
+            const blob = new Blob([response.data.plaintext])
             const href = window.URL.createObjectURL(blob)
             const link = document.getElementById('download-file')
             link.href = href
             link.setAttribute('download', file.name)
         } catch (error) {
-            console.log(error)
-            setErrorMsg(error.response.data.message)
+            setErrorMsg(error.response.data.err)
         }
     }
 

@@ -68,8 +68,7 @@ function Affine() {
                 link.href  = href
                 link.setAttribute('download',file.name)
             }catch(error){
-                console.log(error)
-                // setErrorMsg(error)
+                setErrorMsg(error.response.data.err)
             }
         }
 
