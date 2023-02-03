@@ -81,6 +81,16 @@ export default function Enigma() {
         }
     }
 
+    const rotateRotor = () => {
+        if (key[2] === 'Z') {
+            if (key[1] === 'Z') {
+                clickButtonUp('rotor1')
+            }
+            clickButtonUp('rotor2')
+        }
+        clickButtonUp('rotor3')
+    }
+
     const encode = async (e) => {
         setErrorMsg('')
         setResult('')
@@ -94,6 +104,7 @@ export default function Enigma() {
             response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}enigma/encrypt`, formdata)
             setResult(response.data.cipher)
             turnOnLamp(response.data.cipher[0])
+            rotateRotor()
             console.log(response)
             document.getElementById('container-result').scrollIntoView()
             if (!isFileUsed) return
@@ -120,6 +131,7 @@ export default function Enigma() {
             response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}enigma/decrypt`, formdata)
             setResult(response.data.plaintext)
             turnOnLamp(response.data.plaintext[0])
+            rotateRotor()
             console.log(response)
             document.getElementById('container-result').scrollIntoView()
             if (!isFileUsed) return
