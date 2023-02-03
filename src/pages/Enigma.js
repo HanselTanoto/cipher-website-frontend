@@ -45,8 +45,6 @@ export default function Enigma() {
         if (e === 'rotor3') {
             setKey(key[0] + key[1] + newRotorValue)
         }
-        console.log(newRotorValue)
-        console.log(key)
     }
 
     const clickButtonDown = (e) => {
@@ -82,8 +80,10 @@ export default function Enigma() {
     }
 
     const rotateRotor = () => {
-        if (key[2] === 'Z') {
-            if (key[1] === 'Z') {
+        var valrotor2 = document.getElementById('rotor2').getElementsByTagName('div')[0].innerHTML
+        var valrotor3 = document.getElementById('rotor3').getElementsByTagName('div')[0].innerHTML
+        if (valrotor3 === 'Z') {
+            if (valrotor2 === 'Z') {
                 clickButtonUp('rotor1')
             }
             clickButtonUp('rotor2')
@@ -91,24 +91,33 @@ export default function Enigma() {
         clickButtonUp('rotor3')
     }
 
+    const delay = (delayInms) => {
+        return new Promise(resolve => setTimeout(resolve, delayInms));
+      }
+
     const encode = async (e) => {
         setErrorMsg('')
         setResult('')
         e.preventDefault()
         const formdata = new FormData()
-        formdata.append('textUpload', textUpload)
+        formdata.append('textUpload', textUpload.toUpperCase())
         formdata.append('key', key)
         formdata.append('file', file)
         let response = null
         try {
             response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}enigma/encrypt`, formdata)
-            setResult(response.data.cipher)
-            turnOnLamp(response.data.cipher[0])
-            rotateRotor()
+            for(let i=0;i<response.data.cipher.length;i++){
+                turnOnLamp(response.data.cipher[i])
+                await delay(300)
+                turnOffAllLamp()
+                rotateRotor()
+                await delay(300)
+            }
+            setResult(response.data.cipher.toUpperCase())
             console.log(response)
             document.getElementById('container-result').scrollIntoView()
             if (!isFileUsed) return
-            const blob = new Blob([response.data.cipher])
+            const blob = new Blob([response.data.cipher.toUpperCase()])
             const href = window.URL.createObjectURL(blob)
             const link = document.getElementById('download-file')
             link.href = href
@@ -123,19 +132,26 @@ export default function Enigma() {
         setResult('')
         e.preventDefault()
         const formdata = new FormData()
-        formdata.append('textUpload', textUpload)
+        formdata.append('textUpload', textUpload.toUpperCase())
         formdata.append('key', key)
         formdata.append('file', file)
         let response = null
         try {
             response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}enigma/decrypt`, formdata)
-            setResult(response.data.plaintext)
-            turnOnLamp(response.data.plaintext[0])
-            rotateRotor()
+            console.log(textUpload)
+            console.log(response.data.plaintext)
+            for(let i=0;i<response.data.plaintext.length;i++){
+                turnOnLamp(response.data.plaintext[i])
+                await delay(300)
+                turnOffAllLamp()
+                rotateRotor()
+                await delay(300)
+            }
+            setResult(response.data.plaintext.toUpperCase())
             console.log(response)
             document.getElementById('container-result').scrollIntoView()
             if (!isFileUsed) return
-            const blob = new Blob([response.data.plaintext])
+            const blob = new Blob([response.data.plaintext.toUpperCase()])
             const href = window.URL.createObjectURL(blob)
             const link = document.getElementById('download-file')
             link.href = href
@@ -153,8 +169,8 @@ export default function Enigma() {
                     <Card.Body>
                         <Card.Header>Enigma Encoder & Decoder</Card.Header>
                         <div className="container-mode">
-                            <Form.Check type="radio" label="Encoder" name="mode" id="encode" checked onChange={() => setMode(true)} style={{ marginRight: '20px' }} />
-                            <Form.Check type="radio" label="Decoder" name="mode" id="decode" onChange={() => setMode(false)} style={{ marginLeft: '20px' }} />
+                            <Form.Check type="radio" label="Encoder" name="mode" id="encode" checked onClick={() => setMode(true)} style={{ marginRight: '20px' }} />
+                            <Form.Check type="radio" label="Decoder" name="mode" id="decode" onClick={() => setMode(false)} style={{ marginLeft: '20px' }} />
                         </div>
                         <p style={{ color: '#B8B8B8', fontSize: '14px', textAlign: 'center', marginTop:'40px' }}>
                             Rotor (Key)
@@ -189,36 +205,36 @@ export default function Enigma() {
                             </div>
                         </div>
                         <div className="container-lamp">
-                            <div className="lamp" id='lamp1'>{keyboard[0]}</div>
-                            <div className="lamp" id='lamp2'>{keyboard[1]}</div>
-                            <div className="lamp" id='lamp3'>{keyboard[2]}</div>
-                            <div className="lamp" id='lamp4'>{keyboard[3]}</div>
-                            <div className="lamp" id='lamp5'>{keyboard[4]}</div>
-                            <div className="lamp" id='lamp6'>{keyboard[5]}</div>
-                            <div className="lamp" id='lamp7'>{keyboard[6]}</div>
-                            <div className="lamp" id='lamp8'>{keyboard[7]}</div>
-                            <div className="lamp" id='lamp9'>{keyboard[8]}</div>
+                            <div className="lamp" id='lamp0'>{keyboard[0]}</div>
+                            <div className="lamp" id='lamp1'>{keyboard[1]}</div>
+                            <div className="lamp" id='lamp2'>{keyboard[2]}</div>
+                            <div className="lamp" id='lamp3'>{keyboard[3]}</div>
+                            <div className="lamp" id='lamp4'>{keyboard[4]}</div>
+                            <div className="lamp" id='lamp5'>{keyboard[5]}</div>
+                            <div className="lamp" id='lamp6'>{keyboard[6]}</div>
+                            <div className="lamp" id='lamp7'>{keyboard[7]}</div>
+                            <div className="lamp" id='lamp8'>{keyboard[8]}</div>
                         </div>
                         <div className="container-lamp">
-                            <div className="lamp" id='lamp10'>{keyboard[9]}</div>
-                            <div className="lamp" id='lamp11'>{keyboard[10]}</div>
-                            <div className="lamp" id='lamp12'>{keyboard[11]}</div>
-                            <div className="lamp" id='lamp13'>{keyboard[12]}</div>
-                            <div className="lamp" id='lamp14'>{keyboard[13]}</div>
-                            <div className="lamp" id='lamp15'>{keyboard[14]}</div>
-                            <div className="lamp" id='lamp16'>{keyboard[15]}</div>
-                            <div className="lamp" id='lamp17'>{keyboard[16]}</div>
+                            <div className="lamp" id='lamp9'>{keyboard[9]}</div>
+                            <div className="lamp" id='lamp10'>{keyboard[10]}</div>
+                            <div className="lamp" id='lamp11'>{keyboard[11]}</div>
+                            <div className="lamp" id='lamp12'>{keyboard[12]}</div>
+                            <div className="lamp" id='lamp13'>{keyboard[13]}</div>
+                            <div className="lamp" id='lamp14'>{keyboard[14]}</div>
+                            <div className="lamp" id='lamp15'>{keyboard[15]}</div>
+                            <div className="lamp" id='lamp16'>{keyboard[16]}</div>
                         </div>
                         <div className="container-lamp">
-                            <div className="lamp" id='lamp18'>{keyboard[17]}</div>
-                            <div className="lamp" id='lamp19'>{keyboard[18]}</div>
-                            <div className="lamp" id='lamp20'>{keyboard[19]}</div>
-                            <div className="lamp" id='lamp21'>{keyboard[20]}</div>
-                            <div className="lamp" id='lamp22'>{keyboard[21]}</div>
-                            <div className="lamp" id='lamp23'>{keyboard[22]}</div>
-                            <div className="lamp" id='lamp24'>{keyboard[23]}</div>
-                            <div className="lamp" id='lamp25'>{keyboard[24]}</div>
-                            <div className="lamp" id='lamp26'>{keyboard[25]}</div>
+                            <div className="lamp" id='lamp17'>{keyboard[17]}</div>
+                            <div className="lamp" id='lamp18'>{keyboard[18]}</div>
+                            <div className="lamp" id='lamp19'>{keyboard[19]}</div>
+                            <div className="lamp" id='lamp20'>{keyboard[20]}</div>
+                            <div className="lamp" id='lamp21'>{keyboard[21]}</div>
+                            <div className="lamp" id='lamp22'>{keyboard[22]}</div>
+                            <div className="lamp" id='lamp23'>{keyboard[23]}</div>
+                            <div className="lamp" id='lamp24'>{keyboard[24]}</div>
+                            <div className="lamp" id='lamp25'>{keyboard[25]}</div>
                         </div>
                         <div className="container-form-input">
                             <Card.Text>Text</Card.Text>
@@ -234,7 +250,6 @@ export default function Enigma() {
                                     value={textUpload}
                                     onChange={(e) => {
                                         setTextUpload(e.target.value)
-                                        mode ? encode() : decode()
                                         turnOffAllLamp()
                                     }} />
                             }
@@ -250,9 +265,9 @@ export default function Enigma() {
                             }
                             <div className="container-button">
                                 {mode ?
-                                <Button  onClick={encode}>Encrypt</Button>
+                                <Button  onClick={(e) => {encode(e)}}>Encrypt</Button>
                                 :
-                                <Button  onClick={decode}>Decrypt</Button>
+                                <Button  onClick={(e) => {decode(e)}}>Decrypt</Button>
                                 }
                             </div>
                         </div>
