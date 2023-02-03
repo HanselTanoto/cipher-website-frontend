@@ -388,27 +388,51 @@ tr:nth-child(odd) {
 }
 
 
+/* ENIGMA PAGE */
+.container-rotor {
+    display:flex;
+    justify-content: center;
+    margin:20px 0;
+}
 
+.rotor {
+    background-color: #C69749;
+    width:50px;
+    height:auto; 
+    text-align:center; 
+    border-radius:5px;
+    margin: 0 10px;   
+}
 
-/* .cipher-list h1 {
-    font-size: 50px;
-    font-weight: 700;
-    letter-spacing: 0.8px;
-    line-height: 1;
-    margin: 40px 0 0 0;
-    display: block;
-    font-weight: bold;
+.buttonUp, .buttonDown {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+}
+
+.buttonUp:hover, .buttonDown:hover {
+    background-color: #C69749;
+    opacity: 0.5;
+    border: none;
+}
+
+.rotor-text {
+    width: 50px;
+    height: auto;
     text-align: center;
 }
 
-.cipher-list p {
-    color: #B8B8B8;
-    font-size: 18px;
-    letter-spacing: 1px;
-    line-height: 1.5em;
-    width: 96%;
-    text-align: center;
-    margin: 50px 70px 0 70px;
-    padding-right: 90px;
-} */
+.container-lamp {
+    display:flex;
+    justify-content: center;
+}
 
+.lamp {
+    background-color: rgba(0, 0, 0, 0);
+    width:30px;
+    height:30px; 
+    text-align:center; 
+    border: #C69749 2px solid;
+    border-radius:100%;
+    margin:10px;   
+    justify-content: center;
+}

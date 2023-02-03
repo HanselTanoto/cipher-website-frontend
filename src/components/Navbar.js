@@ -8,6 +8,7 @@ import ExtendedVigenere from '../pages/ExtendedVigenere'
 import Affine from '../pages/Affine'
 import Playfair from '../pages/Playfair'
 import Hill from '../pages/Hill'
+import Enigma from '../pages/Enigma';
 import About from '../pages/About'
 import Home from '../pages/Home'
 
@@ -35,6 +36,7 @@ export default class NavBarComp extends Component {
                                     <Nav.Link as={Link} to="/affine">Affine Cipher</Nav.Link>
                                     <Nav.Link as={Link} to="/playfair">Playfair Cipher</Nav.Link>
                                     <Nav.Link as={Link} to="/hill">Hill Cipher</Nav.Link>
+                                    <Nav.Link as={Link} to="/enigma">Enigma Cipher</Nav.Link>
                                 </Nav>
                                 <Nav>
                                     <Nav.Link as={Link} to="/about">About</Nav.Link>
@@ -51,6 +53,7 @@ export default class NavBarComp extends Component {
                         <Route path="/affine" element={<Affine />} />
                         <Route path="/playfair" element={<Playfair />} />
                         <Route path="/hill" element={<Hill />} />
+                        <Route path="/enigma" element={<Enigma />} />
                         <Route path="/about" element={<About />} />
                         <Route path="/" element={<Home />} />
                     </Routes>
