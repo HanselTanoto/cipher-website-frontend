@@ -9,9 +9,8 @@ export default function About() {
                 <p>
                     Welcome to CryptoCalc, a website that can help you encrypt and decrypt messages easily and quickly.
                     You can use it to encrypt various types of messages like text, images, audio and video files using different types of ciphers.
-                    Currently, CryptoCalc only provides support for Standard Vigenere, Auto-Key Vigenere, Extended Vigenere, Affine, Playfair and Hill ciphers 
-                    but hopefully, more ciphers will be added in the future.
-                    Below is the brief explanation of each cipher.
+                    Currently, CryptoCalc only provides support for Standard Vigenere, Auto-Key Vigenere, Extended Vigenere, Affine, Playfair, 
+                    Hill and Enigma ciphers but hopefully, more ciphers will be added in the future. Below is the brief explanation of each cipher.
                 </p>
             </div>
                 <div className="cipher-list">
@@ -78,6 +77,17 @@ export default function About() {
                                 <Card.Text>
                                     The Hill cipher is a polygraphic substitution cipher based on linear algebra. Each letter is represented by a number modulo 26.
                                     To encrypt a message, each block of n letters is multiplied by an invertible n × n matrix, against modulus 26. 
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                    <Col xs={12} lg={6} xl={4}>
+                        <Card style = {{width: '20rem', height: '20rem'}} className="mx-auto cipher-card">
+                            <Card.Header><h1>Enigma Cipher</h1></Card.Header>
+                            <Card.Body>
+                                <Card.Text>
+                                    The Enigma cipher is a cipher machine developed and used in the early- to mid-20th century to protect commercial, diplomatic and military communication.
+                                    It was employed extensively by Nazi Germany during World War II, in all branches of the German military.     
                                 </Card.Text>
                             </Card.Body>
                         </Card>
