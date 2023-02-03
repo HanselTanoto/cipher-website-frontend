@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {Card , Form, Button} from 'react-bootstrap'
+import {Card , Form, Button, DropdownButton, Dropdown} from 'react-bootstrap'
 import axios from 'axios'
 import { CaretDownFill, CaretUpFill } from 'react-bootstrap-icons'
 
@@ -7,9 +7,7 @@ export default function Enigma() {
     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     const keyboard = 'QWERTZUIOASDFGHJKPYXCVBNML'
 
-    const [rotor1, setRotor1] = useState('A')
-    const [rotor2, setRotor2] = useState('A')
-    const [rotor3, setRotor3] = useState('A')
+    const [mode, setMode] = useState(true) // true = encrypt, false = decrypt
     const [isFileUsed, setIsFileUsed] = useState(false)
     const [textUpload, setTextUpload] = useState('')
     const [key, setKey] = useState('AAA')
@@ -39,15 +37,16 @@ export default function Enigma() {
         let newRotorValue = alphabet[(rotorValueIndex + 1) % 26]
         rotor.getElementsByTagName('div')[0].innerHTML = newRotorValue
         if (e === 'rotor1') {
-            setRotor1(newRotorValue)
+            setKey(newRotorValue + key[1] + key[2])
         }
         if (e === 'rotor2') {
-            setRotor2(newRotorValue)
+            setKey(key[0] + newRotorValue + key[2])
         }
         if (e === 'rotor3') {
-            setRotor3(newRotorValue)
+            setKey(key[0] + key[1] + newRotorValue)
         }
-        setKey(rotor1 + rotor2 + rotor3)
+        console.log(newRotorValue)
+        console.log(key)
     }
 
     const clickButtonDown = (e) => {
@@ -57,15 +56,16 @@ export default function Enigma() {
         let newRotorValue = alphabet[(rotorValueIndex - 1 + 26) % 26]
         rotor.getElementsByTagName('div')[0].innerHTML = newRotorValue
         if (e === 'rotor1') {
-            setRotor1(newRotorValue)
+            setKey(newRotorValue + key[1] + key[2])
         }
         if (e === 'rotor2') {
-            setRotor2(newRotorValue)
+            setKey(key[0] + newRotorValue + key[2])
         }
         if (e === 'rotor3') {
-            setRotor3(newRotorValue)
+            setKey(key[0] + key[1] + newRotorValue)
         }
-        setKey(rotor1 + rotor2 + rotor3)
+        console.log(newRotorValue)
+        console.log(key)
     }
 
     const turnOnLamp = (e) => {
@@ -74,6 +74,12 @@ export default function Enigma() {
         lamp.style.backgroundColor = 'yellow'
     }
 
+    const turnOffAllLamp = () => {
+        for (let i = 0; i < 26; i++) {
+            let lamp = document.getElementById('lamp' + i)
+            lamp.style.backgroundColor = 'rgba(0, 0, 0, 0)'
+        }
+    }
 
     const encode = async (e) => {
         setErrorMsg('')
@@ -134,6 +140,13 @@ export default function Enigma() {
                 <Card className="form">
                     <Card.Body>
                         <Card.Header>Enigma Encoder & Decoder</Card.Header>
+                        <div className="container-mode">
+                            <Form.Check type="radio" label="Encoder" name="mode" id="encode" checked onChange={() => setMode(true)} style={{ marginRight: '20px' }} />
+                            <Form.Check type="radio" label="Decoder" name="mode" id="decode" onChange={() => setMode(false)} style={{ marginLeft: '20px' }} />
+                        </div>
+                        <p style={{ color: '#B8B8B8', fontSize: '14px', textAlign: 'center', marginTop:'40px' }}>
+                            Rotor (Key)
+                        </p>
                         <div className="container-rotor">
                             <div className="rotor" id='rotor1'>
                                 <Button className='buttonUp' onClick={() => clickButtonUp('rotor1')}>
@@ -207,7 +220,11 @@ export default function Enigma() {
                                     as={'textarea'} 
                                     id="textUpload"
                                     value={textUpload}
-                                    onChange={(e) => setTextUpload(e.target.value)} />
+                                    onChange={(e) => {
+                                        setTextUpload(e.target.value)
+                                        mode ? encode() : decode()
+                                        turnOffAllLamp()
+                                    }} />
                             }
                             <Form.Check
                                 type="switch"
@@ -220,8 +237,11 @@ export default function Enigma() {
                                 <div></div>
                             }
                             <div className="container-button">
-                                <Button style={{ marginRight:'15px' }} onClick={encode}>Encrypt</Button>
-                                <Button style={{ marginLeft:'15px' }} onClick={decode}>Decrypt</Button>
+                                {mode ?
+                                <Button  onClick={encode}>Encrypt</Button>
+                                :
+                                <Button  onClick={decode}>Decrypt</Button>
+                                }
                             </div>
                         </div>
                     </Card.Body>
