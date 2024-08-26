@@ -1,5 +1,5 @@
 # Tugas 1 Kriptografi Classical Cipher Website - Frontend
-Accessible at https://cryptocalc-api-cvuk2yexpa-et.a.run.app/
+Accessible at https://cryptocalc-cvuk2yexpa-et.a.run.app/
 
 ## Anggota
 - Primanda Adyatma Hafiz (13520022)
